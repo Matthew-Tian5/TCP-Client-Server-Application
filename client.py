@@ -232,13 +232,7 @@ def main():
 
     print(f"[CONNECTED] Connected to {host}:{port}")
 
-    # CHANGES HERE: 60-second timeout on socket operations.
-    # Without this, if the server stops responding mid-conversation
-    # (for example, it crashes after sending READY but before saving the file),
-    # recv() blocks forever and the client hangs with no way to recover except
-    # Ctrl+C. With a timeout, socket.timeout is raised, which is a subclass of
-    # OSError and is caught by the main loop below, printing an error and
-    # closing the connection cleanly. 60s is generous enough for large files.
+    #incase server times out or we lose connection we dont need to wait forever for a response
     sock.settimeout(60)
 
     print(HELP_TEXT)
